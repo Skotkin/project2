@@ -6,15 +6,30 @@ format: html
 
 # Setting Up Environment
 ```{r}
-#| document: show
-#| warning: false
 library(tidyverse)
-library(leaflet)
-library(RColorBrewer)
-library(sf)
+library(dplyr)
 
-Somerville <- read_csv("Somerville_Happiness_Survey_Responses.csv") |>
-  filter(Year == 2025, !is.na(Education.Quality.Satisfaction.num), !is.na(Housing.Condition.Satisfaction.num), !is.na(Feel.Part.Community.num), !is.na(Somerville.Satisfaction.num)) |>
-  select(ID, Year, Age, Gender, Race.Ethnicity, Household.Income, Education.Quality.Satisfaction.num, Education.Quality.Satisfaction.label, Housing.Condition.Satisfaction.num, Housing.Condition.Satisfaction.label, Feel.Part.Community.num, Feel.Part.Community.label, Somerville.Satisfaction.num, Somerville.Satisfaction.label)
+somerville_org <- read_csv("Somerville_Happiness_Survey_Responses.csv") |> #loading csv
+  filter(Year == 2025) |> #filtering to only responses from 2025
+  select(ID, Year, Age, Gender, Race.Ethnicity, Household.Income, Education.Quality.Satisfaction.num, Education.Quality.Satisfaction.label, Housing.Condition.Satisfaction.num, Housing.Condition.Satisfaction.label, Feel.Part.Community.num, Feel.Part.Community.label, Somerville.Satisfaction.num, Somerville.Satisfaction.label) #selecting desired variables
+```
+
+# Removing NAs
+```{r}
+somerville_na <- somerville_org |>
+  drop_na() #removing NAs from dataframe
+```
+
+#Converting Characters to Factors
+```{r}
+somerville<- somerville_na |>
+  mutate(across(where(is.character), as.factor)) #mutates across all variables where class is character and changes to factors
+```
+
+
+# Writing Refined Dataframe .csv file
+```{r}
+somerville  |>
+    write.csv("refined_somerville.csv") #creates a new .csv file with refined data
 ```
 
