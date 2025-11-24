@@ -17,3 +17,30 @@ Somerville_data <- read.csv("/Users/samanthakotkin/Desktop/SDS192/project2/Somer
 View(Somerville_data)
 ```
 
+# Messing Around with Visualizations
+
+```{r}
+Somerville_data |> filter(Year == 2025) |>
+  ggplot(aes(x = Happiness.num)) + facet_wrap(vars(Household.Income), scales = "free") + geom_histogram()
+```
+
+```{r}
+Somerville_data |> filter(Year == 2025) |>
+  ggplot(aes(x = Happiness.num, fill = Household.Income)) + geom_bar(position = "fill")
+```
+
+
+Potential Visualizations:
+
+- heat map (for correlations between demographic info and happiness)
+- histograms/bar charts (exs above)
+- violin? for distribution across groups of happiness?
+
+
+# Table Stuff
+
+```{r}
+Somerville_data |> filter(Year == 2025) |>
+  select(ID, Gender, Age, Race.Ethnicity, Housing.Status, Highest.Level.Education, )
+```
+
