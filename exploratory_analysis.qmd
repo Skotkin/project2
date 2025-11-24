@@ -10,11 +10,10 @@ library(tidyverse)
 library(ggplot2)
 ```
 
-
-
 Samantha:
 
 ```{r}
-
+Somerville_data <- read.csv("/Users/samanthakotkin/Desktop/SDS192/project2/Somerville_Happiness_Survey_Responses.csv")
+View(Somerville_data)
 ```
 
