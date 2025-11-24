@@ -14,7 +14,7 @@ library(RColorBrewer)
 library(sf)
 
 Somerville <- read_csv("Somerville_Happiness_Survey_Responses.csv") |>
-  filter(Year == 2025) |>
+  filter(Year == 2025, !is.na(Education.Quality.Satisfaction.num), !is.na(Housing.Condition.Satisfaction.num), !is.na(Feel.Part.Community.num), !is.na(Somerville.Satisfaction.num)) |>
   select(ID, Year, Age, Gender, Race.Ethnicity, Household.Income, Education.Quality.Satisfaction.num, Education.Quality.Satisfaction.label, Housing.Condition.Satisfaction.num, Housing.Condition.Satisfaction.label, Feel.Part.Community.num, Feel.Part.Community.label, Somerville.Satisfaction.num, Somerville.Satisfaction.label)
 ```
 
