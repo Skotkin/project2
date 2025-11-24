@@ -3,3 +3,18 @@ title: "exploratory_analysis"
 author: "Samantha Kotkin, and Sophia Mu"
 format: html
 ---
+
+# Loading Libraries
+```{r}
+library(tidyverse)
+library(ggplot2)
+```
+
+
+
+Samantha:
+
+```{r}
+
+```
+
