@@ -3,3 +3,18 @@ title: "data_tidying"
 author: "Daniella Quihuis"
 format: html
 ---
+
+# Setting Up Environment
+```{r}
+#| document: show
+#| warning: false
+library(tidyverse)
+library(leaflet)
+library(RColorBrewer)
+library(sf)
+
+Somerville <- read_csv("Somerville_Happiness_Survey_Responses.csv") |>
+  filter(Year == 2025) |>
+  select(ID, Year, Age, Gender, Race.Ethnicity, Household.Income, Education.Quality.Satisfaction.num, Education.Quality.Satisfaction.label, Housing.Condition.Satisfaction.num, Housing.Condition.Satisfaction.label, Feel.Part.Community.num, Feel.Part.Community.label, Somerville.Satisfaction.num, Somerville.Satisfaction.label)
+```
+
