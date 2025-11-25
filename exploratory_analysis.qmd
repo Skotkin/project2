@@ -73,7 +73,8 @@ Somerville_data |>
 # attempting to write a function- this is just normal code
 Somerville_data |>
   group_by(Race.Ethnicity) |>
-  summarize(medianEduSat = median(Education.Quality.Satisfaction.num))
+  summarize(medianEduSat = median(Education.Quality.Satisfaction.num), 
+            medianHap = median (Happiness.num))
 ```
 
 ```{r}
@@ -93,7 +94,7 @@ findingMedian(Somerville_data)
 findingMedian2 <- function(data){
  data |>
   group_by(Race.Ethnicity) |>
-  summarize(across(c(Education.Quality.Satisfaction.num, Housing.Condition.Satisfaction.num, Feel.Part.Community.num, Somerville.Satisfaction.num), median))
+  summarize(across(c(Education.Quality.Satisfaction.num, Housing.Condition.Satisfaction.num, Feel.Part.Community.num, Somerville.Satisfaction.num, Happiness.num), median))
 }
 ```
 
@@ -117,6 +118,7 @@ histogramFunction <- function(data, col){
   geom_histogram()
 }
 ```
+
 ```{r}
 histogramFunction(Somerville_data, Somerville.Satisfaction.num)
 ```
@@ -124,4 +126,15 @@ histogramFunction(Somerville_data, Somerville.Satisfaction.num)
 ```{r}
 histogramFunction(Somerville_data, Feel.Part.Community.num)
 ```
+```{r}
+histogramFunction(Somerville_data, Happiness.num)
+```
+```{r}
+histogramFunction(Somerville_data, Education.Quality.Satisfaction.num)
+```
+```{r}
+histogramFunction(Somerville_data, Housing.Condition.Satisfaction.num)
+```
+
+
 
