@@ -11,7 +11,7 @@ library(dplyr)
 
 somerville_org <- read_csv("Somerville_Happiness_Survey_Responses.csv") |> #loading csv
   filter(Year == 2025) |> #filtering to only responses from 2025
-  select(ID, Year, Age, Gender, Race.Ethnicity, Household.Income, Education.Quality.Satisfaction.num, Education.Quality.Satisfaction.label, Housing.Condition.Satisfaction.num, Housing.Condition.Satisfaction.label, Feel.Part.Community.num, Feel.Part.Community.label, Somerville.Satisfaction.num, Somerville.Satisfaction.label) #selecting desired variables
+  select(ID, Year, Age, Gender, Race.Ethnicity, Household.Income, Education.Quality.Satisfaction.num, Education.Quality.Satisfaction.label, Housing.Condition.Satisfaction.num, Housing.Condition.Satisfaction.label, Feel.Part.Community.num, Feel.Part.Community.label, Somerville.Satisfaction.num, Somerville.Satisfaction.label, Happiness.num) #selecting desired variables
 ```
 
 # Removing NAs
