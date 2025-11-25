@@ -8,39 +8,120 @@ format: html
 ```{r}
 library(tidyverse)
 library(ggplot2)
+library(knitr)
 ```
 
-Samantha:
+Samantha - sophia edited some:
 
 ```{r}
-Somerville_data <- read.csv("/Users/samanthakotkin/Desktop/SDS192/project2/Somerville_Happiness_Survey_Responses.csv")
+# the refined comes from the data tidying that was previously done, if you run the code you'll get the new csv on your computer
+Somerville_data <- read.csv("refined_somerville.csv")
 View(Somerville_data)
 ```
 
 # Messing Around with Visualizations
 
 ```{r}
+# I think we need to decide if we want to do happiness or satisfaction because in the data cleaning, we took out happiness and only left in satisfaction. 
 Somerville_data |> filter(Year == 2025) |>
-  ggplot(aes(x = Happiness.num)) + facet_wrap(vars(Household.Income), scales = "free") + geom_histogram()
+  ggplot(aes(x = Somerville.Satisfaction.num)) + facet_wrap(vars(Household.Income), scales = "free") + geom_histogram()
 ```
 
 ```{r}
 Somerville_data |> filter(Year == 2025) |>
-  ggplot(aes(x = Happiness.num, fill = Household.Income)) + geom_bar(position = "fill")
+  ggplot(aes(x = Somerville.Satisfaction.num, fill = Household.Income)) + geom_bar(position = "fill")
 ```
 
 
 Potential Visualizations:
 
-- heat map (for correlations between demographic info and happiness)
-- histograms/bar charts (exs above)
+- heat map (for correlations between demographic info and happiness) **do you think this feels more like primary analyses bc it's sorta answering our question?** 
+- histograms/bar charts (exs above) **Sophia will do histograms to see how responses are distributued!** 
 - violin? for distribution across groups of happiness?
 
 
 # Table Stuff
 
 ```{r}
-Somerville_data |> filter(Year == 2025) |>
-  select(ID, Gender, Age, Race.Ethnicity, Housing.Status, Highest.Level.Education, )
+# we also don't have some of these variables
+Somerville_data |> 
+  select(ID, Gender, Age, Race.Ethnicity) |>
+  kable()
+```
+
+## Sophia: 
+
+### Exploratory data analyses
+```{r}
+#seeing total number of participants
+Somerville_data |>
+  summarize(count = n()) |>
+  kable()
+```
+
+A lot of ppl preferred not to answer and very few Black and 2 or more races. -- idk if that is good or bad or if we can just note it in the limitations.  
+```{r}
+#just seeing number of people in each race because it will def affect analyses
+Somerville_data |>
+  group_by(Race.Ethnicity) |>
+  summarize(raceCount = n()) |>
+  kable()
+```
+
+## Median Function
+```{r}
+# attempting to write a function- this is just normal code
+Somerville_data |>
+  group_by(Race.Ethnicity) |>
+  summarize(medianEduSat = median(Education.Quality.Satisfaction.num))
+```
+
+```{r}
+#this one is weird bc the is.numeric is returning all of the numeric, even year, so I will try again, but idk if it will be right 
+findingMedian <- function(data){
+  data |>
+  group_by(Race.Ethnicity) |>
+  summarize(across(where(is.numeric), median))
+}
+```
+
+```{r}
+findingMedian(Somerville_data)
+```
+```{r}
+#function pt 2
+findingMedian2 <- function(data){
+ data |>
+  group_by(Race.Ethnicity) |>
+  summarize(across(c(Education.Quality.Satisfaction.num, Housing.Condition.Satisfaction.num, Feel.Part.Community.num, Somerville.Satisfaction.num), median))
+}
+```
+
+```{r}
+findingMedian2(Somerville_data)
+```
+## Histogram function
+```{r}
+Somerville_data |> 
+  ggplot(aes(x = Somerville.Satisfaction.num)) + 
+  geom_histogram()
+```
+Left skewed. 
+
+## I need help with the function bc i feel like i should be using map to make all the histograms with one line of code, like in the lab but I will try later
+```{r}
+#idk if this is right
+histogramFunction <- function(data, col){
+  data |> 
+  ggplot(aes(x = {{col}})) + 
+  geom_histogram()
+}
+```
+```{r}
+histogramFunction(Somerville_data, Somerville.Satisfaction.num)
+```
+
+```{r}
+histogramFunction(Somerville_data, Feel.Part.Community.num)
 ```
 
