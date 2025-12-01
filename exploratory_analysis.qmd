@@ -37,12 +37,12 @@ Somerville_data |> filter(Year == 2025) |>
 ```{r}
 barFunction <- function(var){
   Somerville_data |> 
-    ggplot(aes(x = Somerville.Satisfaction.num, fill = {{var}})) + geom_bar(position = "fill")
+    filter(var == {{var}}) |> 
+    ggplot(aes(x = Somerville.Satisfaction.num, fill = {var})) + geom_bar(position = "fill") + labs(title = "Satisfaction and Demographic info", x = "Satisfaction Score", y = "Count", fill = var)
   
 }
 
-var = c("Age", "Gender", "Race.Ethnicity", "Household.Income") |>
-  map(var, barFunction)
+map(Somerville_data, barFunction)
 ```
 
 
