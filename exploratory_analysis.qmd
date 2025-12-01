@@ -123,16 +123,16 @@ s_data <- Somerville_data |>
 
 ```{r}
 #idk if this is right
-histogramFunction <- function(col, data){
+histogramFunction <- function(col, label, data){
   data |> 
   ggplot(aes(x = {{col}})) + 
   geom_histogram() +
-  labs(x = col)
+  labs(x = label)
 }
 ```
 
 ```{r}
-map(s_data, histogramFunction, Somerville_data)
+map2(s_data, colnames(s_data), histogramFunction, Somerville_data)
 ```
 
 
