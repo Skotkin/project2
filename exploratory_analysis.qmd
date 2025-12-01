@@ -100,7 +100,8 @@ findingMedian <- function(data){
 ```
 
 ```{r}
-findingMedian(Somerville_data)
+findingMedian(Somerville_data) |>
+  kable()
 ```
 ```{r}
 #function pt 2
@@ -116,38 +117,22 @@ findingMedian2(Somerville_data)
 ```
 ## Histogram function
 ```{r}
-Somerville_data |> 
-  ggplot(aes(x = Somerville.Satisfaction.num)) + 
-  geom_histogram()
+s_data <- Somerville_data |>
+  select(Education.Quality.Satisfaction.num, Housing.Condition.Satisfaction.num, Feel.Part.Community.num, Somerville.Satisfaction.num, Happiness.num)
 ```
-Left skewed. 
 
-## I need help with the function bc i feel like i should be using map to make all the histograms with one line of code, like in the lab but I will try later
 ```{r}
 #idk if this is right
-histogramFunction <- function(data, col){
+histogramFunction <- function(col, data){
   data |> 
   ggplot(aes(x = {{col}})) + 
-  geom_histogram()
+  geom_histogram() +
+  labs(x = col)
 }
 ```
 
 ```{r}
-histogramFunction(Somerville_data, Somerville.Satisfaction.num)
+map(s_data, histogramFunction, Somerville_data)
 ```
-
-```{r}
-histogramFunction(Somerville_data, Feel.Part.Community.num)
-```
-```{r}
-histogramFunction(Somerville_data, Happiness.num)
-```
-```{r}
-histogramFunction(Somerville_data, Education.Quality.Satisfaction.num)
-```
-```{r}
-histogramFunction(Somerville_data, Housing.Condition.Satisfaction.num)
-```
-
 
 
