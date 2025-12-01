@@ -35,14 +35,14 @@ Somerville_data |> filter(Year == 2025) |>
 # Making a Function to view different demographic variables and their relationship to satisfaction through a stacked bar graph
 
 ```{r}
-barFunction <- function(var){
+barFunction <- function(var, label){
   Somerville_data |> 
     filter(var == {{var}}) |> 
-    ggplot(aes(x = Somerville.Satisfaction.num, fill = {var})) + geom_bar(position = "fill") + labs(title = "Satisfaction and Demographic info", x = "Satisfaction Score", y = "Count", fill = var)
+    ggplot(aes(x = Somerville.Satisfaction.num, fill = {var})) + geom_bar(position = "fill") + labs(title = "Satisfaction and Demographic info", x = "Satisfaction Score", y = "Count", fill = label)
   
 }
 
-map(Somerville_data, barFunction)
+map2(Somerville_data, colnames(Somerville_data), barFunction)
 ```
 
 
