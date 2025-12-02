@@ -11,54 +11,25 @@ library(ggplot2)
 library(knitr)
 ```
 
-Samantha - sophia edited some:
+# Data Loading
 
 ```{r}
-# the refined comes from the data tidying that was previously done, if you run the code you'll get the new csv on your computer
 Somerville_data <- read.csv("refined_somerville.csv")
 View(Somerville_data)
 ```
 
-# Messing Around with Visualizations
+# Tables
 
+Correlations between Happiness and Life Satisfaction
 ```{r}
-# I think we need to decide if we want to do happiness or satisfaction because in the data cleaning, we took out happiness and only left in satisfaction. 
-Somerville_data |>
-  ggplot(aes(x = Somerville.Satisfaction.num)) + facet_wrap(vars(Household.Income), scales = "free") + geom_histogram()
+cor.test(Somerville_data$Somerville.Satisfaction.num, Somerville_data$Happiness.num, method = "pearson")
 ```
-
-```{r}
-Somerville_data |> filter(Year == 2025) |>
-  ggplot(aes(x = Somerville.Satisfaction.num, fill = Household.Income)) + geom_bar(position = "fill")
-```
-
-# Making a Function to view different demographic variables and their relationship to satisfaction through a stacked bar graph
-
-```{r}
-barFunction <- function(var, label){
-  Somerville_data |> 
-    filter(var == {{var}}) |> 
-    ggplot(aes(x = Somerville.Satisfaction.num, fill = {var})) + geom_bar(position = "fill") + labs(title = "Satisfaction and Demographic info", x = "Satisfaction Score", y = "Count", fill = label)
-  
-}
-
-map2(Somerville_data, colnames(Somerville_data), barFunction)
-```
-
-
-Potential Visualizations:
-
-- heat map (for correlations between demographic info and happiness) **do you think this feels more like primary analyses bc it's sorta answering our question?** 
-- histograms/bar charts (exs above) **Sophia will do histograms to see how responses are distributued!** 
-- violin? for distribution across groups of happiness?
-
-
-# Table Stuff
 
 ```{r}
 # we also don't have some of these variables
 Somerville_data |> 
-  select(ID, Gender, Age, Race.Ethnicity) |>
+  group_by(ID, Gender, Age, Race.Ethnicity) |>
+  summarize(count = n()) |>
   kable()
 ```
 
@@ -81,28 +52,7 @@ Somerville_data |>
   kable()
 ```
 
-## Median Function
-```{r}
-# attempting to write a function- this is just normal code
-Somerville_data |>
-  group_by(Race.Ethnicity) |>
-  summarize(medianEduSat = median(Education.Quality.Satisfaction.num), 
-            medianHap = median (Happiness.num))
-```
 
-```{r}
-#this one is weird bc the is.numeric is returning all of the numeric, even year, so I will try again, but idk if it will be right 
-findingMedian <- function(data){
-  data |>
-  group_by(Race.Ethnicity) |>
-  summarize(across(where(is.numeric), median))
-}
-```
-
-```{r}
-findingMedian(Somerville_data) |>
-  kable()
-```
 ```{r}
 #function pt 2
 findingMedian2 <- function(data){
@@ -113,7 +63,7 @@ findingMedian2 <- function(data){
 ```
 
 ```{r}
-findingMedian2(Somerville_data)
+findingMedian2(Somerville_data) |> kable()
 ```
 ## Histogram function
 ```{r}
