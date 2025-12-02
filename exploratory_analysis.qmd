@@ -24,26 +24,40 @@ Correlations between Happiness and Life Satisfaction
 ```{r}
 cor.test(Somerville_data$Somerville.Satisfaction.num, Somerville_data$Happiness.num, method = "pearson")
 ```
+We are 95% confident that there is a moderate (r = .40) and positive correlation between Happiness and Life Satisfaction (p = 2.2e-16), indicating that Happiness is associated with Life Satisfaction. This information helped us to decide to use Happiness as our independent variable in our analysis, as Happiness and Life Satisfaction seem to be interchangeable
 
+Looking at Demographic info
 ```{r}
-# we also don't have some of these variables
-Somerville_data |> 
-  group_by(ID, Gender, Age, Race.Ethnicity) |>
-  summarize(count = n()) |>
-  kable()
+countFunction <- function(col){
+ Somerville_data |>
+    group_by({{col}}) |> 
+    summarize(count = n()) 
+}
+selected <- Somerville_data |> select(Age, Gender, Race.Ethnicity, Household.Income)
+#countFunction(c(Age, Gender, Race.Ethnicity))
+map(selected, countFunction) |> kable()
+#map2(s_data, colnames(s_data), histogramFunction, Somerville_data)
 ```
 
-## Sophia: 
+
+```{r}
+Somerville_data |> group_by(Somerville_data$Gender, Somerville_data$Race.Ethnicity) |> summarize(across(Age:Race.Ethnicity, count))
+
+Somerville_data |> summarize(across(c(Age, Gender, Race.Ethnicity), n_distinct))
+
+```
+Summarized the count of each of the demographic categories that the participants fall into
 
 ### Exploratory data analyses
 ```{r}
 #seeing total number of participants
 Somerville_data |>
-  summarize(count = n()) |>
-  kable()
+  summarize(count = n())
 ```
 
-A lot of ppl preferred not to answer and very few Black and 2 or more races. -- idk if that is good or bad or if we can just note it in the limitations.  
+After removing missing variables and answers, there are 471 total participants in the 2025 Somerville Happiness Survey. 
+
+According to the below table, the majority of the participants are White. The next highest amount of participants prefered not to answer. There is a large disparity between Black or African Amerrican and Two or more races respondees and White respondees. This likely reflects on the population of Somerville. 
 ```{r}
 #just seeing number of people in each race because it will def affect analyses
 Somerville_data |>
@@ -55,16 +69,18 @@ Somerville_data |>
 
 ```{r}
 #function pt 2
-findingMedian2 <- function(data){
+findingMean <- function(data){
  data |>
   group_by(Race.Ethnicity) |>
-  summarize(across(c(Education.Quality.Satisfaction.num, Housing.Condition.Satisfaction.num, Feel.Part.Community.num, Somerville.Satisfaction.num, Happiness.num), median))
+  summarize(across(c(Education.Quality.Satisfaction.num, Housing.Condition.Satisfaction.num, Feel.Part.Community.num, Somerville.Satisfaction.num, Happiness.num), mean))
 }
 ```
 
 ```{r}
-findingMedian2(Somerville_data) |> kable()
+findingMean(Somerville_data) |> kable()
 ```
+This table shows us the average happiness and satisfaction scores across different survey variables for each race. Participants who did not identify their race/ethnicity were on average the least happy with their Education Quality, followed by White participants. Participants with two or more races/ethnicity were on average the least satisfied with their housing. Participants who did not identify their race/ethnicity on average felt the least a part of their community.
+
 ## Histogram function
 ```{r}
 s_data <- Somerville_data |>
@@ -72,7 +88,6 @@ s_data <- Somerville_data |>
 ```
 
 ```{r}
-#idk if this is right
 histogramFunction <- function(col, label, data){
   data |> 
   ggplot(aes(x = {{col}})) + 
@@ -85,4 +100,4 @@ histogramFunction <- function(col, label, data){
 map2(s_data, colnames(s_data), histogramFunction, Somerville_data)
 ```
 
-
+Histogram showing the range of Satisfaction of all participants for each variable. Across all variables, participants were the least satisfied with their quality of education. This is consistent with our previous table which showed that White participants (who are notably the majority of the respondents)....
