@@ -15,7 +15,6 @@ library(knitr)
 
 ```{r}
 Somerville_data <- read.csv("refined_somerville.csv")
-View(Somerville_data)
 ```
 
 # Tables
@@ -37,14 +36,6 @@ selected <- Somerville_data |> select(Age, Gender, Race.Ethnicity, Household.Inc
 #countFunction(c(Age, Gender, Race.Ethnicity))
 map(selected, countFunction) |> kable()
 #map2(s_data, colnames(s_data), histogramFunction, Somerville_data)
-```
-
-
-```{r}
-Somerville_data |> group_by(Somerville_data$Gender, Somerville_data$Race.Ethnicity) |> summarize(across(Age:Race.Ethnicity, count))
-
-Somerville_data |> summarize(across(c(Age, Gender, Race.Ethnicity), n_distinct))
-
 ```
 Summarized the count of each of the demographic categories that the participants fall into
 
