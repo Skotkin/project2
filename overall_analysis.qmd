@@ -32,7 +32,7 @@ ggplot(corDataMelted, aes(x = X1, y = X2, fill = value)) +
 ```
 
 ```{r}
-cor.test(Somerville_data$Somerville.Satisfaction.num, Somerville_data$Happiness.num, method = "pearson")
+cor.test(Somerville_data$Education.Quality.Satisfaction.num, Somerville_data$Happiness.num, method = "pearson")
 ```
 
 ```{r}
