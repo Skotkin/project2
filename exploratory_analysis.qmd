@@ -15,7 +15,6 @@ library(knitr)
 
 ```{r}
 Somerville_data <- read.csv("refined_somerville.csv")
-View(Somerville_data)
 ```
 
 # Tables
@@ -38,8 +37,11 @@ selected <- Somerville_data |> select(Age, Gender, Race.Ethnicity, Household.Inc
 map(selected, countFunction) |> kable()
 #map2(s_data, colnames(s_data), histogramFunction, Somerville_data)
 ```
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> 4e879130e7dfe15ded9af34476fae60787795a2e
 Summarized the count of each of the demographic categories that the participants fall into
 
 ### Exploratory data analyses
@@ -94,4 +96,4 @@ histogramFunction <- function(col, label, data){
 map2(s_data, colnames(s_data), histogramFunction, Somerville_data)
 ```
 
-Histogram showing the range of Satisfaction of all participants for each variable. Across all variables, participants were the least satisfied with their quality of education. This is consistent with our previous table which showed that White participants (who are notably the majority of the respondents)....
+Histogram showing the range of Satisfaction of all participants for each variable. Across all variables, participants were the least satisfied with the quality of each given variable, with ratings in the 4s and 5s. Because of this trend, most of these histograms are skewed left. Education quality satisfaction seems to be more normally distributed, with the majority of the participants rating it a 3. 
