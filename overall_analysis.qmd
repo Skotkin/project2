@@ -3,3 +3,35 @@ title: "overall_analysis"
 author: "Amanda Stein"
 format: html
 ---
+
+```{r}
+library(tidyverse)
+library(ggplot2)
+```
+
+```{r}
+Somerville_data <- read.csv("refined_somerville.csv")
+```
+
+Satisfaction with housing based on race, will fix labels if this is kept!
+```{r}
+ggplot(Somerville_data, aes(x = Housing.Condition.Satisfaction.label, fill = Race.Ethnicity)) +
+  geom_bar() +
+  theme_minimal()
+```
+
+```{r}
+barFunction <- function(var, label) {
+  Somerville_data |>
+    filter(var == {{var}}) |>
+    ggplot(aes(x = Somerville.Satisfaction.num, fill = {{var}})) +
+             geom_bar(position = "fill") + labs(title = "Satisfaction and Demographic Info", x = "Satisfaction Score", y = "Count", fill = label)
+}
+
+map2(Somerville_data, colnames(Somerville_data), barFunction)
+```
+
+```{r}
+cor.test(Somerville_data$Somerville.Satisfaction.num, Somerville_data$Happiness.num, method = "pearson")
+```
+
