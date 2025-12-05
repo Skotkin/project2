@@ -40,12 +40,6 @@ map(selected, countFunction) |> kable()
 ```
 
 
-```{r}
-Somerville_data |> group_by(Somerville_data$Gender, Somerville_data$Race.Ethnicity) |> summarize(across(Age:Race.Ethnicity, count))
-
-Somerville_data |> summarize(across(c(Age, Gender, Race.Ethnicity), n_distinct))
-
-```
 Summarized the count of each of the demographic categories that the participants fall into
 
 ### Exploratory data analyses
