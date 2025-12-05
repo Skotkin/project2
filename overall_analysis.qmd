@@ -10,44 +10,13 @@ library(ggplot2)
 ```
 
 ```{r}
-Somerville_data <- read.csv("refined_somerville.csv")
+data <- read.csv("refined_somerville.csv")
+Somerville_data <- data |>
+  mutate(across(where(is.character), as.factor)) |>
+  mutate(across(c("Education.Quality.Satisfaction.label", "Housing.Condition.Satisfaction.label", "Somerville.Satisfaction.label"), ~factor(., levels = c("Very Unsatisfied", "Unsatisfied", "Neutral", "Satisfied", "Very Satisfied"))))
+
 ```
 
-Satisfaction with housing based on race, will fix labels if this is kept!
-```{r}
-ggplot(Somerville_data, aes(x = Housing.Condition.Satisfaction.num, y = Happiness.num)) +
-  geom_point(position = position_jitter(width = 0.1, height = 0.1), alpha = 0.2 ) +
-  theme_minimal()
-```
-```{r}
-ggplot(Somerville_data, aes(x = Happiness.num, fill = Race.Ethnicity)) +
-  geom_bar() +
-  facet_wrap("Housing.Condition.Satisfaction.label") +
-  theme_minimal()
-```
-
-
-```{r}
-ggplot(Somerville_data, aes(x = Happiness.num, fill = Race.Ethnicity)) +
-  geom_bar() +
-  facet_wrap("Education.Quality.Satisfaction.label") +
-  theme_minimal()
-```
-
-```{r}
-barFunction <- function(var, label) {
-  Somerville_data |>
-    filter(var == {{var}}) |>
-    ggplot(aes(x = Somerville.Satisfaction.num, fill = {{var}})) +
-             geom_bar(position = "fill") + labs(title = "Satisfaction and Demographic Info", x = "Satisfaction Score", y = "Count", fill = label)
-}
-
-map2(Somerville_data, colnames(Somerville_data), barFunction)
-```
-
-```{r}
-cor.test(Somerville_data$Somerville.Satisfaction.num, Somerville_data$Happiness.num, method = "pearson")
-```
 ```{r}
 library(reshape)
 corData <- cor(Somerville_data [, c("Education.Quality.Satisfaction.num", "Housing.Condition.Satisfaction.num", "Feel.Part.Community.num", "Somerville.Satisfaction.num", "Happiness.num")])
@@ -59,4 +28,18 @@ ggplot(corDataMelted, aes(x = X1, y = X2, fill = value)) +
   labs(title = ,
        fill = "Correlation") + theme_minimal()
 ```
+
+```{r}
+cor.test(Somerville_data$Somerville.Satisfaction.num, Somerville_data$Happiness.num, method = "pearson")
+```
+
+```{r}
+ggplot(Somerville_data, aes(x = Happiness.num, fill = Race.Ethnicity)) +
+  geom_bar() +
+  facet_wrap("Education.Quality.Satisfaction.label") +
+  theme_minimal()
+```
+
+
+
 
