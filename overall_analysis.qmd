@@ -17,6 +17,8 @@ Somerville_data <- data |>
 
 ```
 
+
+need to reformat x axis labels
 ```{r}
 library(reshape)
 corData <- cor(Somerville_data [, c("Education.Quality.Satisfaction.num", "Housing.Condition.Satisfaction.num", "Feel.Part.Community.num", "Somerville.Satisfaction.num", "Happiness.num")])
