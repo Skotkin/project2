@@ -27,8 +27,18 @@ corDataMelted <- melt(corData)
 ggplot(corDataMelted, aes(x = X1, y = X2, fill = value)) +
   scale_fill_gradient2(low = "blue", high = "red", mid = "white", midpoint = 0, limit = c(-1, 1), name = "Correlation") +
   geom_tile() + xlab("") + ylab("") +
-  labs(title = ,
+  labs(title = "Correlation Between Satisfaction Metrics in Somerville, MA, 2025",
        fill = "Correlation") + 
+  scale_x_discrete(labels = c("Happiness.num" = "Happiness",
+                              "Somerville.Satisfaction.num" = "Somerville Satisfaction",
+                              "Feel.Part.Community.num" = "Community Inclusion", 
+                              "Housing.Condition.Satisfaction.num" = "Housing Satisfaction",
+                              "Education.Quality.Satisfaction.num" = "Education Satisfaction")) +
+  scale_y_discrete(labels = c("Happiness.num" = "Happiness",
+                              "Somerville.Satisfaction.num" = "Somerville Satisfaction",
+                              "Feel.Part.Community.num" = "Community Inclusion", 
+                              "Housing.Condition.Satisfaction.num" = "Housing Satisfaction",
+                              "Education.Quality.Satisfaction.num" = "Education Satisfaction")) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 ```
 From this we can see that there is mainly a correlation between feeling part of the community and Somerville satisfaction, as well as education quality and Somerville satisfaction. 
@@ -45,6 +55,7 @@ Bar plots showing the relationship between happiness, race, and education qualit
 ggplot(Somerville_data, aes(x = Happiness.num, fill = Race.Ethnicity)) +
   geom_bar() +
   facet_wrap("Education.Quality.Satisfaction.label") +
+  labs(title = "The Relationship Between Happiness and Education Quality Satisfaction among Racial Groups in Somerville, MA, 2025", x = "Happiness Rating", y = "Count") +
   theme_minimal()
 ```
 
