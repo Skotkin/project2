@@ -86,5 +86,18 @@ histogramFunction <- function(col, label, data){
 ```{r}
 map2(s_data, colnames(s_data), histogramFunction, Somerville_data)
 ```
+```{r}
+histogramFunctionAge <- function(col, label, data){
+  data |> 
+  ggplot(aes(x = {{col}})) + 
+  geom_histogram() +
+    facet_wrap(vars(Age), scales = "free") + 
+  labs(x = gsub("[.]", " ", label), y = "Count", title = "Distribution of Satisfaction Ratings Among Somerville \n Happiness Survey Participants, Somerville, MA, 2025")
+}
+```
+
+```{r}
+map2(s_data, colnames(s_data), histogramFunction, Somerville_data)
+```
 
 Histogram showing the range of Satisfaction of all participants for each variable. Across all variables, participants were the least satisfied with the quality of each given variable, with ratings in the 4s and 5s. Because of this trend, most of these histograms are skewed left. Education quality satisfaction seems to be more normally distributed, with the majority of the participants rating it a 3. 

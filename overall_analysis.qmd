@@ -61,7 +61,7 @@ We are 95% confident that there is a weak (r = .27) and positive correlation bet
 ```{r}
 ggplot(Somerville_data, aes(x = Happiness.num, fill = Race.Ethnicity)) +
   geom_bar() +
-  facet_wrap("Education.Quality.Satisfaction.label") +
+  facet_wrap("Education.Quality.Satisfaction.label", scales = "free") +
   labs(title = "The Relationship Between Happiness and Education Quality Satisfaction among \nRacial Groups in Somerville, MA, 2025", x = "Happiness Rating", y = "Count") +
   theme_minimal()
 ```
