@@ -23,7 +23,7 @@ Correlations between Happiness and Life Satisfaction
 ```{r}
 cor.test(Somerville_data$Somerville.Satisfaction.num, Somerville_data$Happiness.num, method = "pearson")
 ```
-We are 95% confident that there is a moderate (r = .40) and positive correlation between Happiness and Life Satisfaction (p = 2.2e-16), indicating that Happiness is associated with Life Satisfaction. This information helped us to decide to use Happiness as our independent variable in our analysis, as Happiness and Life Satisfaction seem to be interchangeable
+We are 95% confident that there is a moderate (r = .40) and positive correlation between Happiness and Life Satisfaction (p = 0.05, indicating that Happiness is associated with Life Satisfaction. This information helped us to decide to use Happiness as our independent variable in our analysis, as Happiness and Life Satisfaction seem to be interchangeable
 
 Looking at Demographic info
 ```{r}
@@ -88,7 +88,7 @@ histogramFunction <- function(col, label, data){
   data |> 
   ggplot(aes(x = {{col}})) + 
   geom_histogram() +
-  labs(x = label)
+  labs(x = label, y = "Count", title = "Distribution of Satisfaction Ratings Among Somerville \n Happiness Survey Participants, Somerville, MA, 2025")
 }
 ```
 
