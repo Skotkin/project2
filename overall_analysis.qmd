@@ -18,7 +18,7 @@ Somerville_data <- data |>
 ```
 
 
-Heatmap comparing correlations of satisfaction in regard to specific metrics.
+# Heatmap comparing correlations of satisfaction in regard to specific metrics.
 ```{r}
 library(reshape)
 corData <- cor(Somerville_data [, c("Education.Quality.Satisfaction.num", "Housing.Condition.Satisfaction.num", "Feel.Part.Community.num", "Somerville.Satisfaction.num", "Happiness.num")])
@@ -43,23 +43,23 @@ ggplot(corDataMelted, aes(x = X1, y = X2, fill = value)) +
 ```
 From this we can see that there is mainly a correlation between feeling part of the community and Somerville satisfaction, as well as education quality and Somerville satisfaction. 
 
-Correlation test between happiness and Somerville satisfaction.
+# Correlation test between happiness and Somerville satisfaction.
 ```{r}
-cor.test(Somerville_data$Education.Quality.Satisfaction.num, Somerville_data$Happiness.num, method = "pearson")
+cor.test(Somerville_data$Somerville.Satisfaction.num, Somerville_data$Happiness.num, method = "pearson")
 ```
 We are 95% confident that there is a moderate (r = .40) and positive correlation between Happiness and Life Satisfaction (p = 2.2e-16), indicating that Happiness is associated with Life Satisfaction. Since we are interested in how happiness relates to these metrics about Somerville, we can examine the strong correlations with Somerville satisfaction in the heatmap in relation to happiness to see how that relates as well.
 
 
-Bar plots showing the relationship between happiness, race, and education quality satisfaction.
+# Bar plots showing the relationship between happiness, race, and education quality satisfaction.
 ```{r}
 ggplot(Somerville_data, aes(x = Happiness.num, fill = Race.Ethnicity)) +
   geom_bar() +
   facet_wrap("Education.Quality.Satisfaction.label") +
-  labs(title = "The Relationship Between Happiness and Education Quality Satisfaction among Racial Groups in Somerville, MA, 2025", x = "Happiness Rating", y = "Count") +
+  labs(title = "The Relationship Between Happiness and Education Quality Satisfaction among \nRacial Groups in Somerville, MA, 2025", x = "Happiness Rating", y = "Count") +
   theme_minimal()
 ```
 
-We chose to analyze the relationship between happiness, education quality satisfaction, and race in Somerville because in our histograms from the exploratory analysis, we noticed that there is less satisfaction with education than most other metrics. From this plot we can see that as satisfaction with education increases, happiness also tends to increase. However, most people in Somerville are neutral or only somewhat satisfied with education, showing that there is a lack of quality in the education systems in Somerville. The largest amount of Asian or Pacific Islander, Black or African American, White, Two or more races, and Prefer not to answer populations reported neutral satisfaction with education, and similarly had a mid-level of happiness. Hispanic or Latino populations were more satisfied with education quality. These statments are based on visual interpretation of the bar plots, and thus may not be perfect. This still shows that generally, most racial populations in Somerville are neutral or satisfied with education systems, showing that education quality (or lack of quality) is due to general systems in Somerville and not specific racial issues, such as certain schools consisting of higher proportions of a certain race and therefore having higher or lower quality due to funding, zoning, or wealth discrepancies.
+We chose to analyze the relationship between happiness, education quality satisfaction, and race in Somerville because in our histograms from the exploratory analysis, we noticed that there is less satisfaction with education than most other metrics. From this plot we can see that as satisfaction with education increases, happiness also tends to increase. However, most people in Somerville are neutral or only somewhat satisfied with education, showing that there is a lack of quality in the education systems in Somerville. The largest amount of Asian or Pacific Islander, Black or African American, White, Two or more races, and Prefer not to answer populations reported neutral satisfaction with education, and similarly had a mid-level of happiness. Hispanic or Latino populations were more satisfied with education quality. These statements are based on visual interpretation of the bar plots, and thus may not be perfect. This still shows that generally, most racial populations in Somerville are neutral or satisfied with education systems, showing that education quality (or lack of quality) is due to general systems in Somerville and not specific racial issues, such as certain schools consisting of higher proportions of a certain race and therefore having higher or lower quality due to funding, zoning, or wealth discrepancies.
 
 
 
