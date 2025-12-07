@@ -53,7 +53,7 @@ We are 95% confident that there is a moderate (r = .40) and positive correlation
 ```{r}
 cor.test(Somerville_data$Education.Quality.Satisfaction.num, Somerville_data$Happiness.num, method = "pearson")
 ```
-We are 95% confident that there is a weak (r = .27) and positive correlation between Happiness and education quality satisfaction (p = 4.009e-09), indicating that Happiness is somewhat associated with education quality satisfaction. Since we are interested in how happiness relates to these metrics about Somerville, we can examine the strong correlations with Somerville satisfaction in the heatmap in relation to happiness to see how that relates as well.
+We are 95% confident that there is a weak (r = .27) and positive correlation between Happiness and education quality satisfaction (p = 4.009e-09), indicating that Happiness is somewhat associated with education quality satisf. Since we are interested in how happiness relates to these metrics about Somerville, we can examine the strong correlations with Somerville satisfaction in the heatmap in relation to happiness to see how that relates as well.
 
 # Bar plots showing the relationship between happiness, race, and education quality satisfaction.
 ```{r}
