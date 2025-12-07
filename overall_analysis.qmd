@@ -4,11 +4,12 @@ author: "Amanda Stein"
 format: html
 ---
 
+# Loading Libraries
 ```{r}
 library(tidyverse)
 library(ggplot2)
 ```
-
+# Loading Data Set
 ```{r}
 data <- read.csv("refined_somerville.csv")
 Somerville_data <- data |>
@@ -17,6 +18,7 @@ Somerville_data <- data |>
 
 ```
 
+### Creating and Analyzing Visualizations
 
 # Heatmap comparing correlations of satisfaction in regard to specific metrics.
 ```{r}
@@ -47,13 +49,13 @@ From this we can see that there is mainly a correlation between feeling part of 
 ```{r}
 cor.test(Somerville_data$Somerville.Satisfaction.num, Somerville_data$Happiness.num, method = "pearson")
 ```
-We are 95% confident that there is a moderate (r = .40) and positive correlation between Happiness and Life Satisfaction (p = 2.2e-16), indicating that Happiness is associated with Life Satisfaction. Since we are interested in how happiness relates to these metrics about Somerville, we can examine the strong correlations with Somerville satisfaction in the heatmap in relation to happiness to see how that relates as well.
+We are 95% confident that there is a moderate (r = .40) and positive correlation between Happiness and Life Satisfaction (p = 0.05), indicating that Happiness is associated with Life Satisfaction. Since we are interested in how happiness relates to these metrics about Somerville, we can examine the strong correlations with Somerville satisfaction in the heatmap in relation to happiness to see how that relates as well.
 
 # Correlation test between happiness and education satisfaction.
 ```{r}
 cor.test(Somerville_data$Education.Quality.Satisfaction.num, Somerville_data$Happiness.num, method = "pearson")
 ```
-We are 95% confident that there is a weak (r = .27) and positive correlation between Happiness and education quality satisfaction (p = 4.009e-09), indicating that Happiness is somewhat associated with education quality satisf. Since we are interested in how happiness relates to these metrics about Somerville, we can examine the strong correlations with Somerville satisfaction in the heatmap in relation to happiness to see how that relates as well.
+We are 95% confident that there is a weak (r = .27) and positive correlation between Happiness and education quality satisfaction (p = 0.05), indicating that Happiness is somewhat associated with education quality satisfaction. Since we are interested in how happiness relates to these metrics about Somerville, we can examine the strong correlations with Somerville satisfaction in the hea tmap in relation to happiness to see how that relates as well.
 
 # Bar plots showing the relationship between happiness, race, and education quality satisfaction.
 ```{r}
