@@ -33,9 +33,7 @@ countFunction <- function(col){
     summarize(count = n()) 
 }
 selected <- Somerville_data |> select(Age, Gender, Race.Ethnicity, Household.Income)
-#countFunction(c(Age, Gender, Race.Ethnicity))
-map(selected, countFunction) |> kable(caption = "Survey Demographic Information, Somerville, MA, 2025")
-#map2(s_data, colnames(s_data), histogramFunction, Somerville_data)
+map(selected, countFunction) |> kable(caption = "Survey Demographic Information, Somerville, MA, 2025", col.names = c("Demographic", "Number of Respondents"))
 ```
 
 ### Exploratory data analyses
@@ -52,7 +50,7 @@ According to the below table, the majority of the participants are White. The ne
 Somerville_data |>
   group_by(Race.Ethnicity) |>
   summarize(raceCount = n()) |>
-  kable(caption = "Survey Respondents Race/Ethnicity Breakdown, Somerville, MA, 2025")
+  kable(caption = "Survey Respondents Race/Ethnicity Breakdown, Somerville, MA, 2025", col.names = c("Race/Ethnicity", "Number of Respondents"))
 ```
 
 
@@ -66,7 +64,7 @@ findingMean <- function(data){
 ```
 
 ```{r}
-findingMean(Somerville_data) |> kable(caption = "Mean Reported Satisfaction Scores by Race/Ethnicity, Somerville, MA, 2025")
+findingMean(Somerville_data) |> kable(caption = "Mean Reported Satisfaction Scores by Race/Ethnicity, Somerville, MA, 2025", col.names = c("Race/Ethnicity", "Mean Education Quality Satisfaction Rating", "Mean Housing Condition Satisfaction Rating", "Mean Community Belonging Rating", "Mean Satisfaction Rating", "Mean Happiness Rating"))
 ```
 This table shows us the average happiness and satisfaction scores across different survey variables for each race. Participants who did not identify their race/ethnicity were on average the least happy with their Education Quality, followed by White participants. Participants with two or more races/ethnicity were on average the least satisfied with their housing. Participants who did not identify their race/ethnicity on average felt the least a part of their community.
 
@@ -81,7 +79,7 @@ histogramFunction <- function(col, label, data){
   data |> 
   ggplot(aes(x = {{col}})) + 
   geom_histogram() +
-  labs(x = label, y = "Count", title = "Distribution of Satisfaction Ratings Among Somerville \n Happiness Survey Participants, Somerville, MA, 2025")
+  labs(x = gsub("[.]", " ", label), y = "Count", title = "Distribution of Satisfaction Ratings Among Somerville \n Happiness Survey Participants, Somerville, MA, 2025")
 }
 ```
 
