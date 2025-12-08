@@ -55,7 +55,7 @@ We are 95% confident that there is a moderate (r = .40) and positive correlation
 ```{r}
 cor.test(Somerville_data$Education.Quality.Satisfaction.num, Somerville_data$Happiness.num, method = "pearson")
 ```
-We are 95% confident that there is a weak (r = .27) and positive correlation between Happiness and education quality satisfaction (p = 0.05), indicating that Happiness is somewhat associated with education quality satisfaction. Since we are interested in how happiness relates to these metrics about Somerville, we can examine the strong correlations with Somerville satisfaction in the heat map in relation to happiness to see how that relates as well.
+We are 95% confident that there is a weak (r = .27) and positive correlation between Happiness and education quality satisfaction (p = 0.05), indicating that Happiness is somewhat associated with education quality satisfaction. This is interesting to explore further because we expect to see happiness increase as various satisfaction metrics increase.
 
 # Bar plots showing the relationship between happiness, race, and education quality satisfaction.
 ```{r}
@@ -77,3 +77,4 @@ ggplot(Somerville_data, aes(x = Happiness.num, fill = Age)) +
   theme_minimal()
 ```
 
+We also chose to look at how education satisfaction impacts happiness among different age groups. Of those who reported very unsatisfied, happiness ratings vary quite a bit. The unsatisfied, neutral, and satisfied groups show more of an expected increase in happiness as satisfaction increases, with very satisfied individuals generally feeling happy. It also appears that the older parent age groups tend to be less satisfied based on the lack of 25-34 year olds (presumably new parents) do not tend to express strong dissatisfaction. These individuals likely have not experienced Somerville education as fully as the 35-44 and 45-54 age groups, who tend to express dissatisfaction, especially in the 45-54 age range. This could imply that high schools in Somerville are lower quality, as these older age groups would likely have children approximately high school aged. As age groups continue to increase, we see less responses across all ratings, but of those responses, there seem to be more positive feelings towards Somerville education, which could be explained by a greater disconnect with schools in the area as children of these individuals are likely past their time at Somerville schools. Overall, we are seeing the expected pattern of increase in happiness as education satisfaction increases, and younger parents are more likely to show satisfaction and therefore increased happiness than older parents with children presumably around high school age. 
