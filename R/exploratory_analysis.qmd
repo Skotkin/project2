@@ -14,7 +14,7 @@ library(knitr)
 # Data Loading
 
 ```{r}
-Somerville_data <- read.csv("Data/refined_somerville.csv")
+Somerville_data <- read.csv("~/Documents/project2/Data/refined_somerville.csv")
 ```
 
 # Tables
