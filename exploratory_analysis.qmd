@@ -45,7 +45,7 @@ Somerville_data |>
 
 After removing missing variables and answers, there are 471 total participants in the 2025 Somerville Happiness Survey. 
 
-According to the below table, the majority of the participants are White. The next highest amount of participants prefered not to answer. There is a large disparity between Black or African Amerrican and Two or more races respondees and White respondees. This likely reflects on the population of Somerville. 
+According to the below table, the majority of the participants are White. The next highest amount of participants preferred not to answer. There is a large disparity between Black or African American and Two or more races respondees and White respondees. This likely reflects on the population of Somerville. 
 ```{r}
 Somerville_data |>
   group_by(Race.Ethnicity) |>
