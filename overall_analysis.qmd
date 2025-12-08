@@ -61,20 +61,38 @@ We are 95% confident that there is a weak (r = .27) and positive correlation bet
 ```{r}
 ggplot(Somerville_data, aes(x = Happiness.num, fill = Race.Ethnicity)) +
   geom_bar() +
-  facet_wrap("Education.Quality.Satisfaction.label", scales = "free") +
+  facet_wrap("Education.Quality.Satisfaction.label") +
   labs(title = "The Relationship Between Happiness and Education Quality Satisfaction among \n Racial Groups in Somerville, MA, 2025", x = "Happiness Rating", y = "Count", fill = "Race/Ethnicity ") +
   theme_minimal()
 ```
 
-We chose to analyze the relationship between happiness, education quality satisfaction, and race in Somerville because in our histograms from the exploratory analysis, we noticed that there is less satisfaction with education than most other metrics. From this plot we can see that as satisfaction with education increases, happiness also tends to increase. However, most people in Somerville are neutral or only somewhat satisfied with education, showing that there is a lack of quality in the education systems in Somerville. The largest amount of Asian or Pacific Islander, Black or African American, White, Two or more races, and Prefer not to answer populations reported neutral satisfaction with education, and similarly had a mid-level of happiness. Hispanic or Latino populations were more satisfied with education quality. These statements are based on visual interpretation of the bar plots, and thus may not be perfect. This still shows that generally, most racial populations in Somerville are neutral or satisfied with education systems, showing that education quality (or lack of quality) is due to general systems in Somerville and not specific racial issues, such as certain schools consisting of higher proportions of a certain race and therefore having higher or lower quality due to funding, zoning, or wealth discrepancies.
+We chose to analyze the relationship between happiness, education quality satisfaction, and race in Somerville because in our histograms from the exploratory analysis, we noticed that there is less satisfaction with education than most other metrics. From this plot we can see that as satisfaction with education increases, happiness also tends to increase. However, most people in Somerville are neutral or only somewhat satisfied with education, showing that there is a lack of quality in the education systems in Somerville. The largest amounts of Asian or Pacific Islander, Black or African American, White, Two or more races, and Prefer not to answer populations reported neutral satisfaction with education, and similarly had a mid-level of happiness. Hispanic or Latino populations were more satisfied with education quality, although generally there were fewer respondents. These statements are based on visual interpretation of the bar plots, and thus may not be perfect. This still shows that generally, most racial populations in Somerville are neutral or satisfied with education systems, showing that education quality (or lack of quality) is due to general systems in Somerville and not specific racial issues, such as certain schools consisting of higher proportions of a certain race and therefore having higher or lower quality due to funding, zoning, or wealth discrepancies.
+
+# Bar plot showing the proportion of race/ethnicity in each education quality satisfaction group related to happiness
+```{r}
+ggplot(Somerville_data, aes(x = Happiness.num, fill = Race.Ethnicity)) +
+  geom_bar(position = "fill") +
+  facet_wrap("Education.Quality.Satisfaction.label") +
+  labs(title = "The Relationship Between Happiness and Education Quality Satisfaction among \n Racial Groups in Somerville, MA, 2025", x = "Happiness Rating", y = "Proportion", fill = "Race/Ethnicity ") +
+  theme_minimal()
+```
 
 # Bar plots showing the relationship between happiness, age, and education quality satisfaction.
 ```{r}
 ggplot(Somerville_data, aes(x = Happiness.num, fill = Age)) +
   geom_bar() +
-  facet_wrap("Education.Quality.Satisfaction.label", scales = "free") +
+  facet_wrap("Education.Quality.Satisfaction.label") +
   labs(title = "The Relationship Between Happiness and Education Quality \n Satisfaction among Age Groups in Somerville, MA, 2025", x = "Happiness Rating", y = "Count") +
   theme_minimal()
 ```
 
 We also chose to look at how education satisfaction impacts happiness among different age groups. Of those who reported very unsatisfied, happiness ratings vary quite a bit. The unsatisfied, neutral, and satisfied groups show more of an expected increase in happiness as satisfaction increases, with very satisfied individuals generally feeling happy. It also appears that the older parent age groups tend to be less satisfied based on the lack of 25-34 year olds (presumably new parents) do not tend to express strong dissatisfaction. These individuals likely have not experienced Somerville education as fully as the 35-44 and 45-54 age groups, who tend to express dissatisfaction, especially in the 45-54 age range. This could imply that high schools in Somerville are lower quality, as these older age groups would likely have children approximately high school aged. As age groups continue to increase, we see less responses across all ratings, but of those responses, there seem to be more positive feelings towards Somerville education, which could be explained by a greater disconnect with schools in the area as children of these individuals are likely past their time at Somerville schools. Overall, we are seeing the expected pattern of increase in happiness as education satisfaction increases, and younger parents are more likely to show satisfaction and therefore increased happiness than older parents with children presumably around high school age. 
+
+# Bar plot showing the proportion of age in each education quality satisfaction group related to happiness
+```{r}
+ggplot(Somerville_data, aes(x = Happiness.num, fill = Age)) +
+  geom_bar(position = "fill") +
+  facet_wrap("Education.Quality.Satisfaction.label") +
+  labs(title = "The Relationship Between Happiness and Education Quality \n Satisfaction among Age Groups in Somerville, MA, 2025", x = "Happiness Rating", y = "Proportion") +
+  theme_minimal()
+```
