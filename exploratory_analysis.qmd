@@ -68,6 +68,13 @@ findingMean(Somerville_data) |> kable(caption = "Mean Reported Satisfaction Scor
 ```
 This table shows us the average happiness and satisfaction scores across different survey variables for each race. Participants who did not identify their race/ethnicity were on average the least happy with their Education Quality, followed by White participants. Participants with two or more races/ethnicity were on average the least satisfied with their housing. Participants who did not identify their race/ethnicity on average felt the least a part of their community.
 
+```{r}
+Somerville_data |>
+  group_by(Age) |>
+  summarize(meanEduc = mean(Education.Quality.Satisfaction.num)) |> kable(caption = "Mean Reported Satisfaction Scores by Age, Somerville, MA, 2025", col.names = c("Age", "Mean Education Quality Satisfaction Rating"))
+```
+
+
 ## Histogram function
 ```{r}
 s_data <- Somerville_data |>
@@ -86,6 +93,8 @@ histogramFunction <- function(col, label, data){
 ```{r}
 map2(s_data, colnames(s_data), histogramFunction, Somerville_data)
 ```
+Histogram showing the range of Satisfaction of all participants for each variable. Across all variables, participants were the least satisfied with the quality of each given variable, with ratings in the 4s and 5s. Because of this trend, most of these histograms are skewed left. Education quality satisfaction seems to be more normally distributed, with the majority of the participants rating it a 3. 
+
 ```{r}
 histogramFunctionAge <- function(col, label, data){
   data |> 
@@ -97,7 +106,7 @@ histogramFunctionAge <- function(col, label, data){
 ```
 
 ```{r}
-map2(s_data, colnames(s_data), histogramFunction, Somerville_data)
+map2(s_data, colnames(s_data), histogramFunctionAge, Somerville_data)
 ```
 
-Histogram showing the range of Satisfaction of all participants for each variable. Across all variables, participants were the least satisfied with the quality of each given variable, with ratings in the 4s and 5s. Because of this trend, most of these histograms are skewed left. Education quality satisfaction seems to be more normally distributed, with the majority of the participants rating it a 3. 
+
